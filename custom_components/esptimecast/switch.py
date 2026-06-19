@@ -26,15 +26,15 @@ class ESPTimeCastSwitchDescription(SwitchEntityDescription):
 
 
 SWITCHES = (
-    ESPTimeCastSwitchDescription(key="display", translation_key="display", paths=("displayOff",), icon="mdi:monitor"),
-    ESPTimeCastSwitchDescription(key="flip_display", translation_key="flip_display", paths=("config.flipDisplay", "flipDisplay"), action="flip", save_field="flipDisplay", icon="mdi:rotate-3d-variant"),
-    ESPTimeCastSwitchDescription(key="show_day_of_week", translation_key="show_day_of_week", paths=("config.showDayOfWeek", "showDayOfWeek"), action="show_dayofweek", save_field="showDayOfWeek", icon="mdi:calendar-week"),
-    ESPTimeCastSwitchDescription(key="animated_seconds", translation_key="animated_seconds", paths=("config.colonBlinkEnabled", "colonBlinkEnabled"), action="animated_seconds", save_field="colonBlinkEnabled", icon="mdi:timer-sand"),
-    ESPTimeCastSwitchDescription(key="show_date", translation_key="show_date", paths=("config.showDate", "showDate"), action="show_date", save_field="showDate", icon="mdi:calendar"),
-    ESPTimeCastSwitchDescription(key="twelve_hour", translation_key="twelve_hour", paths=("config.twelveHourToggle", "twelveHourToggle"), action="twelve_hour", save_field="twelveHourToggle", icon="mdi:clock-time-four-outline"),
-    ESPTimeCastSwitchDescription(key="imperial_units", translation_key="imperial_units", paths=("config.weatherUnits", "weatherUnits"), action="units", save_field="weatherUnits", on_value="imperial", off_value="metric", icon="mdi:temperature-fahrenheit"),
-    ESPTimeCastSwitchDescription(key="show_humidity", translation_key="show_humidity", paths=("config.showHumidity", "showHumidity"), action="humidity", save_field="showHumidity", icon="mdi:water-percent"),
-    ESPTimeCastSwitchDescription(key="show_weather_description", translation_key="show_weather_description", paths=("config.showWeatherDescription", "showWeatherDescription"), action="show_weather_desc", save_field="showWeatherDescription", icon="mdi:weather-cloudy"),
+    ESPTimeCastSwitchDescription(key="display", name="Display", translation_key="display", paths=("displayOff",), icon="mdi:monitor"),
+    ESPTimeCastSwitchDescription(key="flip_display", name="Flip display", translation_key="flip_display", paths=("config.flipDisplay", "flipDisplay"), action="flip", save_field="flipDisplay", icon="mdi:rotate-3d-variant"),
+    ESPTimeCastSwitchDescription(key="show_day_of_week", name="Show day of the week", translation_key="show_day_of_week", paths=("config.showDayOfWeek", "showDayOfWeek"), action="show_dayofweek", save_field="showDayOfWeek", icon="mdi:calendar-week"),
+    ESPTimeCastSwitchDescription(key="animated_seconds", name="Animated seconds", translation_key="animated_seconds", paths=("config.colonBlinkEnabled", "colonBlinkEnabled"), action="animated_seconds", save_field="colonBlinkEnabled", icon="mdi:timer-sand"),
+    ESPTimeCastSwitchDescription(key="show_date", name="Show date", translation_key="show_date", paths=("config.showDate", "showDate"), action="show_date", save_field="showDate", icon="mdi:calendar"),
+    ESPTimeCastSwitchDescription(key="twelve_hour", name="12-hour clock", translation_key="twelve_hour", paths=("config.twelveHourToggle", "twelveHourToggle"), action="twelve_hour", save_field="twelveHourToggle", icon="mdi:clock-time-four-outline"),
+    ESPTimeCastSwitchDescription(key="imperial_units", name="Use Fahrenheit", translation_key="imperial_units", paths=("config.weatherUnits", "weatherUnits"), action="units", save_field="weatherUnits", on_value="imperial", off_value="metric", icon="mdi:temperature-fahrenheit"),
+    ESPTimeCastSwitchDescription(key="show_humidity", name="Show humidity", translation_key="show_humidity", paths=("config.showHumidity", "showHumidity"), action="humidity", save_field="showHumidity", icon="mdi:water-percent"),
+    ESPTimeCastSwitchDescription(key="show_weather_description", name="Show weather description", translation_key="show_weather_description", paths=("config.showWeatherDescription", "showWeatherDescription"), action="show_weather_desc", save_field="showWeatherDescription", icon="mdi:weather-cloudy"),
 )
 
 
@@ -52,6 +52,7 @@ class ESPTimeCastSwitch(ESPTimeCastEntity, SwitchEntity):
     def __init__(self, coordinator, description: ESPTimeCastSwitchDescription) -> None:
         super().__init__(coordinator, description.key)
         self.entity_description = description
+        self._attr_name = description.name
 
     @property
     def is_on(self) -> bool | None:

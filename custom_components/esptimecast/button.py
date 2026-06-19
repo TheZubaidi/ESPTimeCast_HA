@@ -21,10 +21,10 @@ class ESPTimeCastButtonDescription(ButtonEntityDescription):
 
 
 BUTTONS = (
-    ESPTimeCastButtonDescription(key="clear_message", translation_key="clear_message", action="clear_message", icon="mdi:message-off-outline"),
-    ESPTimeCastButtonDescription(key="next_mode", translation_key="next_mode", action="next_mode", icon="mdi:skip-next"),
-    ESPTimeCastButtonDescription(key="previous_mode", translation_key="previous_mode", action="prev_mode", icon="mdi:skip-previous"),
-    ESPTimeCastButtonDescription(key="restart", translation_key="restart", action="restart", icon="mdi:restart"),
+    ESPTimeCastButtonDescription(key="clear_message", name="Clear message", translation_key="clear_message", action="clear_message", icon="mdi:message-off-outline"),
+    ESPTimeCastButtonDescription(key="next_mode", name="Next mode", translation_key="next_mode", action="next_mode", icon="mdi:skip-next"),
+    ESPTimeCastButtonDescription(key="previous_mode", name="Previous mode", translation_key="previous_mode", action="prev_mode", icon="mdi:skip-previous"),
+    ESPTimeCastButtonDescription(key="restart", name="Restart", translation_key="restart", action="restart", icon="mdi:restart"),
 )
 
 
@@ -42,6 +42,7 @@ class ESPTimeCastButton(ESPTimeCastEntity, ButtonEntity):
     def __init__(self, coordinator, description: ESPTimeCastButtonDescription) -> None:
         super().__init__(coordinator, description.key)
         self.entity_description = description
+        self._attr_name = description.name
 
     async def async_press(self) -> None:
         """Run the button action."""

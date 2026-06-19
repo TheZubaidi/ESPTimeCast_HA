@@ -22,8 +22,8 @@ class ESPTimeCastBinarySensorDescription(BinarySensorEntityDescription):
 
 
 BINARY_SENSORS = (
-    ESPTimeCastBinarySensorDescription(key="time_synced", translation_key="time_synced", paths=("time_synced",), device_class=BinarySensorDeviceClass.CONNECTIVITY),
-    ESPTimeCastBinarySensorDescription(key="display_busy", translation_key="display_busy", paths=("displayBusy",), icon="mdi:progress-clock"),
+    ESPTimeCastBinarySensorDescription(key="time_synced", name="Time synced", translation_key="time_synced", paths=("time_synced",), device_class=BinarySensorDeviceClass.CONNECTIVITY),
+    ESPTimeCastBinarySensorDescription(key="display_busy", name="Display busy", translation_key="display_busy", paths=("displayBusy",), icon="mdi:progress-clock"),
 )
 
 
@@ -41,6 +41,7 @@ class ESPTimeCastBinarySensor(ESPTimeCastEntity, BinarySensorEntity):
     def __init__(self, coordinator, description: ESPTimeCastBinarySensorDescription) -> None:
         super().__init__(coordinator, description.key)
         self.entity_description = description
+        self._attr_name = description.name
 
     @property
     def is_on(self) -> bool | None:

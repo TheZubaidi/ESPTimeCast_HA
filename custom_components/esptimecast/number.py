@@ -27,6 +27,7 @@ class ESPTimeCastNumberDescription(NumberEntityDescription):
 NUMBERS = (
     ESPTimeCastNumberDescription(
         key="brightness",
+        name="Display brightness",
         translation_key="brightness",
         paths=("brightness",),
         action="brightness",
@@ -38,6 +39,7 @@ NUMBERS = (
     ),
     ESPTimeCastNumberDescription(
         key="clock_duration",
+        name="Clock duration",
         translation_key="clock_duration",
         paths=("config.clockDuration", "clockDuration"),
         save_field="clockDuration",
@@ -50,6 +52,7 @@ NUMBERS = (
     ),
     ESPTimeCastNumberDescription(
         key="weather_duration",
+        name="Weather duration",
         translation_key="weather_duration",
         paths=("config.weatherDuration", "weatherDuration"),
         save_field="weatherDuration",
@@ -77,6 +80,7 @@ class ESPTimeCastNumber(ESPTimeCastEntity, NumberEntity):
     def __init__(self, coordinator, description: ESPTimeCastNumberDescription) -> None:
         super().__init__(coordinator, description.key)
         self.entity_description = description
+        self._attr_name = description.name
 
     @property
     def native_value(self) -> int | None:

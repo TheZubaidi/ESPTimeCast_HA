@@ -23,11 +23,12 @@ class ESPTimeCastSensorDescription(SensorEntityDescription):
 
 
 SENSORS: tuple[ESPTimeCastSensorDescription, ...] = (
-    ESPTimeCastSensorDescription(key="mode", translation_key="mode", paths=("mode",), icon="mdi:view-dashboard"),
-    ESPTimeCastSensorDescription(key="current_message", translation_key="current_message", paths=("customMessage", "message"), icon="mdi:message-text"),
-    ESPTimeCastSensorDescription(key="local_time", translation_key="local_time", paths=("localTime",), icon="mdi:clock-outline"),
+    ESPTimeCastSensorDescription(key="mode", name="Mode", translation_key="mode", paths=("mode",), icon="mdi:view-dashboard"),
+    ESPTimeCastSensorDescription(key="current_message", name="Current message", translation_key="current_message", paths=("customMessage", "message"), icon="mdi:message-text"),
+    ESPTimeCastSensorDescription(key="local_time", name="Local time", translation_key="local_time", paths=("localTime",), icon="mdi:clock-outline"),
     ESPTimeCastSensorDescription(
         key="wifi_signal",
+        name="Wi-Fi signal",
         translation_key="wifi_signal",
         paths=("wifi_signal",),
         device_class=SensorDeviceClass.SIGNAL_STRENGTH,
@@ -36,6 +37,7 @@ SENSORS: tuple[ESPTimeCastSensorDescription, ...] = (
     ),
     ESPTimeCastSensorDescription(
         key="temperature",
+        name="Temperature",
         translation_key="temperature",
         paths=("weather.currentTemperature",),
         device_class=SensorDeviceClass.TEMPERATURE,
@@ -44,13 +46,14 @@ SENSORS: tuple[ESPTimeCastSensorDescription, ...] = (
     ),
     ESPTimeCastSensorDescription(
         key="humidity",
+        name="Humidity",
         translation_key="humidity",
         paths=("weather.currentHumidity",),
         device_class=SensorDeviceClass.HUMIDITY,
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
     ),
-    ESPTimeCastSensorDescription(key="firmware_version", translation_key="firmware_version", paths=("version",), icon="mdi:chip"),
+    ESPTimeCastSensorDescription(key="firmware_version", name="Firmware version", translation_key="firmware_version", paths=("version",), icon="mdi:chip"),
 )
 
 
@@ -68,6 +71,7 @@ class ESPTimeCastSensor(ESPTimeCastEntity, SensorEntity):
     def __init__(self, coordinator, description: ESPTimeCastSensorDescription) -> None:
         super().__init__(coordinator, description.key)
         self.entity_description = description
+        self._attr_name = description.name
 
     @property
     def native_value(self) -> Any:

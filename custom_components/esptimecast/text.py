@@ -27,6 +27,7 @@ class ESPTimeCastTextDescription(TextEntityDescription):
 TEXTS = (
     ESPTimeCastTextDescription(
         key="time_zone",
+        name="Time zone",
         translation_key="time_zone",
         paths=("config.timeZone", "timeZone"),
         save_field="timeZone",
@@ -36,6 +37,7 @@ TEXTS = (
     ),
     ESPTimeCastTextDescription(
         key="language",
+        name="Language",
         translation_key="language",
         paths=("config.language", "language"),
         save_field="language",
@@ -46,6 +48,7 @@ TEXTS = (
     ),
     ESPTimeCastTextDescription(
         key="weather_city",
+        name="Weather city",
         translation_key="weather_city",
         paths=("config.openWeatherCity", "openWeatherCity"),
         save_field="openWeatherCity",
@@ -55,6 +58,7 @@ TEXTS = (
     ),
     ESPTimeCastTextDescription(
         key="weather_country",
+        name="Weather country",
         translation_key="weather_country",
         paths=("config.openWeatherCountry", "openWeatherCountry"),
         save_field="openWeatherCountry",
@@ -64,6 +68,7 @@ TEXTS = (
     ),
     ESPTimeCastTextDescription(
         key="message_to_send",
+        name="Message to send",
         translation_key="message_to_send",
         paths=("customMessage", "message"),
         send_message=True,
@@ -88,6 +93,7 @@ class ESPTimeCastText(ESPTimeCastEntity, TextEntity):
     def __init__(self, coordinator, description: ESPTimeCastTextDescription) -> None:
         super().__init__(coordinator, description.key)
         self.entity_description = description
+        self._attr_name = description.name
 
     @property
     def native_value(self) -> str | None:
