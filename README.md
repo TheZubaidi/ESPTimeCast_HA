@@ -61,6 +61,29 @@ Common status entities:
 
 You do not need to edit Home Assistant YAML to add a device. YAML examples below are only for automations, scripts, and advanced users.
 
+## Updates Through HACS
+
+HACS creates update entities for tracked repositories, so users who install this integration through HACS can update it from Home Assistant when HACS detects a newer version.
+
+There are two common ways to publish updates:
+
+- **Default branch updates**: if you do not publish GitHub releases, HACS tracks the default branch and uses the latest commit as the available version. This is the easiest way for users to receive an update after you commit and push changes to GitHub.
+- **GitHub release updates**: if you publish GitHub releases, HACS uses the latest published release tag as the available version. In that mode, users will not see every commit as an update; they will see updates when you publish a new GitHub release.
+
+Recommended workflow for this repository:
+
+1. Commit your changes.
+2. Push to the default branch, usually `main`.
+3. Let the included HACS validation workflow pass.
+4. HACS users will see an update after HACS refreshes repository data. They may need to restart Home Assistant after updating an integration.
+
+For stable public versions, publish GitHub releases such as `v0.1.1`, `v0.2.0`, and update `version` in `custom_components/esptimecast/manifest.json` to match. Use this release workflow only when you want users to update from releases instead of every default-branch commit.
+
+Relevant HACS docs:
+
+- [HACS update entities](https://www.hacs.xyz/docs/use/entities/update/)
+- [HACS version behavior](https://www.hacs.xyz/docs/publish/start/#versions)
+
 ## Services
 
 Home Assistant exposes these as actions/services. Use them from **Developer Tools > Actions**, automations, scripts, or dashboard helpers.

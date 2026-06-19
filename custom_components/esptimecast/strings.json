@@ -3,7 +3,7 @@
     "step": {
       "user": {
         "title": "Add ESPTimeCast",
-        "description": "Enter the ESPTimeCast device IP address or hostname.",
+        "description": "Enter the ESPTimeCast device IP address, hostname, or status URL.",
         "data": {
           "host": "Host",
           "port": "Port"
@@ -11,7 +11,8 @@
       }
     },
     "error": {
-      "cannot_connect": "Could not connect to the ESPTimeCast device."
+      "cannot_connect": "Could not connect to the ESPTimeCast device.",
+      "invalid_host": "Enter a valid IP address, hostname, or URL."
     },
     "abort": {
       "already_configured": "This ESPTimeCast device is already configured."

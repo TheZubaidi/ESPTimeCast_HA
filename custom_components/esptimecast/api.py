@@ -26,7 +26,7 @@ class ESPTimeCastApi:
     def __init__(self, session: ClientSession, host: str, port: int) -> None:
         self._session = session
         self.host = host.strip()
-        self.port = port
+        self.port = int(port)
 
     @property
     def base_url(self) -> str:
