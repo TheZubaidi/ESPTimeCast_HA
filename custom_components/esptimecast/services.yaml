@@ -1,0 +1,107 @@
+send_message:
+  name: Send message
+  description: Send a temporary message to an ESPTimeCast display.
+  fields:
+    config_entry_id:
+      name: Config entry ID
+      description: Optional fallback target. Use device ID instead when possible.
+      selector:
+        text: {}
+      example: "01JABCDEF123456789"
+    device_id:
+      name: Device
+      description: ESPTimeCast device to target. Required only when more than one device is configured.
+      selector:
+        device:
+          integration: esptimecast
+    message:
+      name: Message
+      description: Message text to show on the clock.
+      required: true
+      selector:
+        text:
+          multiline: true
+      example: "DOOR OPEN"
+    seconds:
+      name: Seconds
+      description: Auto-clear after this many seconds.
+      selector:
+        number:
+          min: 0
+          max: 3600
+          mode: box
+      example: 15
+    scrolls:
+      name: Scrolls
+      description: Number of scroll cycles. Zero means infinite.
+      selector:
+        number:
+          min: 0
+          max: 100
+          mode: box
+      example: 3
+    speed:
+      name: Speed
+      description: Scroll speed. Lower is faster.
+      selector:
+        number:
+          min: 10
+          max: 200
+          mode: slider
+      example: 80
+    big_numbers:
+      name: Big numbers
+      selector:
+        boolean: {}
+    interrupt:
+      name: Interrupt
+      description: Allow this message to interrupt the current display.
+      selector:
+        boolean: {}
+
+clear_message:
+  name: Clear message
+  description: Clear the current temporary ESPTimeCast message.
+  fields:
+    config_entry_id:
+      name: Config entry ID
+      description: Optional fallback target. Use device ID instead when possible.
+      selector:
+        text: {}
+      example: "01JABCDEF123456789"
+    device_id:
+      name: Device
+      description: ESPTimeCast device to target. Required only when more than one device is configured.
+      selector:
+        device:
+          integration: esptimecast
+
+action:
+  name: Action
+  description: Send any ESPTimeCast /action command.
+  fields:
+    config_entry_id:
+      name: Config entry ID
+      description: Optional fallback target. Use device ID instead when possible.
+      selector:
+        text: {}
+      example: "01JABCDEF123456789"
+    device_id:
+      name: Device
+      description: ESPTimeCast device to target. Required only when more than one device is configured.
+      selector:
+        device:
+          integration: esptimecast
+    action:
+      name: Action
+      description: ESPTimeCast action parameter, such as go_to_mode, timer, or brightness.
+      required: true
+      selector:
+        text: {}
+      example: "go_to_mode"
+    value:
+      name: Value
+      description: Optional action value.
+      selector:
+        text: {}
+      example: "clock"

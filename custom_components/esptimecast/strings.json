@@ -1,0 +1,73 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add ESPTimeCast",
+        "description": "Enter the ESPTimeCast device IP address or hostname.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to the ESPTimeCast device."
+    },
+    "abort": {
+      "already_configured": "This ESPTimeCast device is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "mode": { "name": "Mode" },
+      "message": { "name": "Message" },
+      "version": { "name": "Firmware version" },
+      "board": { "name": "Board" },
+      "wifi_signal": { "name": "Wi-Fi signal" },
+      "session_runtime": { "name": "Session runtime" },
+      "device_runtime": { "name": "Device runtime" },
+      "local_time": { "name": "Local time" },
+      "temperature": { "name": "Temperature" },
+      "humidity": { "name": "Humidity" },
+      "weather_description": { "name": "Weather description" },
+      "countdown_label": { "name": "Countdown label" },
+      "countdown_remaining": { "name": "Countdown remaining" },
+      "nightscout_glucose": { "name": "Nightscout glucose" },
+      "nightscout_trend": { "name": "Nightscout trend" },
+      "sns_type": { "name": "SNS type" },
+      "youtube_subscribers": { "name": "YouTube subscribers" },
+      "instagram_followers": { "name": "Instagram followers" },
+      "timezone": { "name": "Time zone" },
+      "language": { "name": "Language" }
+    },
+    "binary_sensor": {
+      "time_synced": { "name": "Time synced" },
+      "display_busy": { "name": "Display busy" },
+      "allow_interrupt": { "name": "Allow interrupt" },
+      "countdown_enabled": { "name": "Countdown enabled" },
+      "nightscout_active": { "name": "Nightscout active" },
+      "nightscout_outdated": { "name": "Nightscout outdated" },
+      "dimming_enabled": { "name": "Dimming enabled" },
+      "auto_dimming_enabled": { "name": "Auto dimming enabled" }
+    },
+    "number": {
+      "brightness": { "name": "Brightness" }
+    },
+    "switch": {
+      "display": { "name": "Display" },
+      "flip_display": { "name": "Flip display" },
+      "twelve_hour": { "name": "12-hour clock" },
+      "show_date": { "name": "Show date" },
+      "show_humidity": { "name": "Show humidity" }
+    },
+    "button": {
+      "clear_message": { "name": "Clear message" },
+      "next_mode": { "name": "Next mode" },
+      "previous_mode": { "name": "Previous mode" },
+      "restart": { "name": "Restart" },
+      "timer_stop": { "name": "Stop timer" },
+      "stopwatch_stop": { "name": "Stop stopwatch" },
+      "pomodoro_stop": { "name": "Stop Pomodoro" }
+    }
+  }
+}
