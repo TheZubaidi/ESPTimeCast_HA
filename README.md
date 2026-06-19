@@ -53,16 +53,18 @@ After setup, Home Assistant creates a device for each ESPTimeCast clock. Open th
 
 Common controls:
 
-- **Brightness**: adjust display brightness from Home Assistant.
-- **Display**: turn the LED display on or off.
-- **Flip display**, **12-hour clock**, **Show date**, and **Show humidity**: toggle common clock settings.
-- **Clear message**, **Next mode**, **Previous mode**, **Restart**, and timer buttons: run common ESPTimeCast actions.
+- **Display brightness**: adjust LED brightness.
+- **Clock duration** and **Weather duration**: control how long each mode is shown.
+- **Time zone**, **Language**, **Weather city**, and **Weather country**: edit stored device settings.
+- **Message to send**: type a message and send it directly to the clock.
+- **Display**, **Flip display**, **Show day of the week**, **Animated seconds**, **Show date**, **12-hour clock**, **Use Fahrenheit**, **Show humidity**, and **Show weather description**: toggle common clock and weather settings.
+- **Clear message**, **Next mode**, **Previous mode**, and **Restart**: run common ESPTimeCast actions.
 
 Common status entities:
 
-- Mode, current message, firmware version, board, Wi-Fi signal, local time, runtimes.
-- Weather temperature, humidity, and description when configured on the device.
-- Countdown, Nightscout, YouTube, and Instagram fields when those features are configured on the device.
+- Mode, current message, local time, Wi-Fi signal, temperature, humidity, firmware version, time sync, and display busy state.
+
+ESPTimeCast firmware currently uses OpenWeather city/country settings. This integration exposes those fields instead of latitude/longitude because the current device API does not provide latitude/longitude config fields.
 
 You do not need to edit Home Assistant YAML to add a device. YAML examples below are only for automations, scripts, and advanced users.
 
@@ -126,4 +128,4 @@ If more than one ESPTimeCast device is configured, include `device_id` in action
 
 ## Exposed Entities
 
-The integration exposes sensors for firmware, board, mode, message, Wi-Fi signal, runtimes, local time, weather, countdown, Nightscout, SNS counters, time zone, and language. It also exposes binary sensors for sync/busy/countdown/Nightscout/dimming states, a brightness number, common setting switches, and action buttons.
+The integration intentionally exposes a compact set of practical entities: clock/weather settings, display controls, message controls, key status sensors, and a few useful action buttons. Advanced ESPTimeCast commands remain available through `esptimecast.action`.

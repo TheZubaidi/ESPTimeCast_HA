@@ -25,9 +25,6 @@ BUTTONS = (
     ESPTimeCastButtonDescription(key="next_mode", translation_key="next_mode", action="next_mode", icon="mdi:skip-next"),
     ESPTimeCastButtonDescription(key="previous_mode", translation_key="previous_mode", action="prev_mode", icon="mdi:skip-previous"),
     ESPTimeCastButtonDescription(key="restart", translation_key="restart", action="restart", icon="mdi:restart"),
-    ESPTimeCastButtonDescription(key="timer_stop", translation_key="timer_stop", action="timer_stop", icon="mdi:timer-off-outline"),
-    ESPTimeCastButtonDescription(key="stopwatch_stop", translation_key="stopwatch_stop", action="stopwatch_stop", icon="mdi:timer-remove-outline"),
-    ESPTimeCastButtonDescription(key="pomodoro_stop", translation_key="pomodoro_stop", action="pomodoro_stop", icon="mdi:timer-cancel-outline"),
 )
 
 

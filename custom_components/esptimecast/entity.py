@@ -12,14 +12,18 @@ from .const import DOMAIN
 from .coordinator import ESPTimeCastCoordinator
 
 
-def value_at(data: Mapping[str, Any], path: str) -> Any:
-    """Return a nested value using dot notation."""
-    current: Any = data
-    for part in path.split("."):
-        if not isinstance(current, Mapping):
-            return None
-        current = current.get(part)
-    return current
+def value_at(data: Mapping[str, Any], *paths: str) -> Any:
+    """Return a nested value using the first matching dot-notation path."""
+    for path in paths:
+        current: Any = data
+        for part in path.split("."):
+            if not isinstance(current, Mapping):
+                current = None
+                break
+            current = current.get(part)
+        if current is not None:
+            return current
+    return None
 
 
 class ESPTimeCastEntity(CoordinatorEntity[ESPTimeCastCoordinator]):

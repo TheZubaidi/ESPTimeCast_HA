@@ -18,18 +18,12 @@ from .entity import ESPTimeCastEntity, value_at
 class ESPTimeCastBinarySensorDescription(BinarySensorEntityDescription):
     """Describe an ESPTimeCast binary sensor."""
 
-    path: str
+    paths: tuple[str, ...]
 
 
 BINARY_SENSORS = (
-    ESPTimeCastBinarySensorDescription(key="time_synced", translation_key="time_synced", path="time_synced", device_class=BinarySensorDeviceClass.CONNECTIVITY),
-    ESPTimeCastBinarySensorDescription(key="display_busy", translation_key="display_busy", path="displayBusy", icon="mdi:progress-clock"),
-    ESPTimeCastBinarySensorDescription(key="allow_interrupt", translation_key="allow_interrupt", path="allowInterrupt", icon="mdi:message-alert-outline"),
-    ESPTimeCastBinarySensorDescription(key="countdown_enabled", translation_key="countdown_enabled", path="countdown.enabled", icon="mdi:calendar-clock"),
-    ESPTimeCastBinarySensorDescription(key="nightscout_active", translation_key="nightscout_active", path="nightscout.active", icon="mdi:diabetes"),
-    ESPTimeCastBinarySensorDescription(key="nightscout_outdated", translation_key="nightscout_outdated", path="nightscout.isOutdated", device_class=BinarySensorDeviceClass.PROBLEM),
-    ESPTimeCastBinarySensorDescription(key="dimming_enabled", translation_key="dimming_enabled", path="dimming.dimmingEnabled", icon="mdi:brightness-4"),
-    ESPTimeCastBinarySensorDescription(key="auto_dimming_enabled", translation_key="auto_dimming_enabled", path="dimming.autoDimmingEnabled", icon="mdi:weather-sunset"),
+    ESPTimeCastBinarySensorDescription(key="time_synced", translation_key="time_synced", paths=("time_synced",), device_class=BinarySensorDeviceClass.CONNECTIVITY),
+    ESPTimeCastBinarySensorDescription(key="display_busy", translation_key="display_busy", paths=("displayBusy",), icon="mdi:progress-clock"),
 )
 
 
@@ -51,7 +45,7 @@ class ESPTimeCastBinarySensor(ESPTimeCastEntity, BinarySensorEntity):
     @property
     def is_on(self) -> bool | None:
         """Return binary state."""
-        value: Any = value_at(self.coordinator.data, self.entity_description.path)
+        value: Any = value_at(self.coordinator.data, *self.entity_description.paths)
         if value is None:
             return None
         return bool(value)

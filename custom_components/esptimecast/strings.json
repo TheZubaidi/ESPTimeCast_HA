@@ -21,54 +21,45 @@
   "entity": {
     "sensor": {
       "mode": { "name": "Mode" },
-      "message": { "name": "Message" },
-      "version": { "name": "Firmware version" },
-      "board": { "name": "Board" },
+      "current_message": { "name": "Current message" },
       "wifi_signal": { "name": "Wi-Fi signal" },
-      "session_runtime": { "name": "Session runtime" },
-      "device_runtime": { "name": "Device runtime" },
       "local_time": { "name": "Local time" },
       "temperature": { "name": "Temperature" },
       "humidity": { "name": "Humidity" },
-      "weather_description": { "name": "Weather description" },
-      "countdown_label": { "name": "Countdown label" },
-      "countdown_remaining": { "name": "Countdown remaining" },
-      "nightscout_glucose": { "name": "Nightscout glucose" },
-      "nightscout_trend": { "name": "Nightscout trend" },
-      "sns_type": { "name": "SNS type" },
-      "youtube_subscribers": { "name": "YouTube subscribers" },
-      "instagram_followers": { "name": "Instagram followers" },
-      "timezone": { "name": "Time zone" },
-      "language": { "name": "Language" }
+      "firmware_version": { "name": "Firmware version" }
     },
     "binary_sensor": {
       "time_synced": { "name": "Time synced" },
-      "display_busy": { "name": "Display busy" },
-      "allow_interrupt": { "name": "Allow interrupt" },
-      "countdown_enabled": { "name": "Countdown enabled" },
-      "nightscout_active": { "name": "Nightscout active" },
-      "nightscout_outdated": { "name": "Nightscout outdated" },
-      "dimming_enabled": { "name": "Dimming enabled" },
-      "auto_dimming_enabled": { "name": "Auto dimming enabled" }
+      "display_busy": { "name": "Display busy" }
     },
     "number": {
-      "brightness": { "name": "Brightness" }
+      "brightness": { "name": "Display brightness" },
+      "clock_duration": { "name": "Clock duration" },
+      "weather_duration": { "name": "Weather duration" }
     },
     "switch": {
       "display": { "name": "Display" },
       "flip_display": { "name": "Flip display" },
-      "twelve_hour": { "name": "12-hour clock" },
+      "show_day_of_week": { "name": "Show day of the week" },
+      "animated_seconds": { "name": "Animated seconds" },
       "show_date": { "name": "Show date" },
-      "show_humidity": { "name": "Show humidity" }
+      "twelve_hour": { "name": "12-hour clock" },
+      "imperial_units": { "name": "Use Fahrenheit" },
+      "show_humidity": { "name": "Show humidity" },
+      "show_weather_description": { "name": "Show weather description" }
     },
     "button": {
       "clear_message": { "name": "Clear message" },
       "next_mode": { "name": "Next mode" },
       "previous_mode": { "name": "Previous mode" },
-      "restart": { "name": "Restart" },
-      "timer_stop": { "name": "Stop timer" },
-      "stopwatch_stop": { "name": "Stop stopwatch" },
-      "pomodoro_stop": { "name": "Stop Pomodoro" }
+      "restart": { "name": "Restart" }
+    },
+    "text": {
+      "time_zone": { "name": "Time zone" },
+      "language": { "name": "Language" },
+      "weather_city": { "name": "Weather city" },
+      "weather_country": { "name": "Weather country" },
+      "message_to_send": { "name": "Message to send" }
     }
   }
 }

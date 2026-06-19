@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from datetime import datetime
+
 import async_timeout
 from aiohttp import ClientError, ClientResponseError, ClientSession
 
@@ -52,6 +54,25 @@ class ESPTimeCastApi:
         payload = {action: "" if value is None else str(value)}
         await self._post_action(payload)
 
+    async def save_config(self, values: dict[str, str | int]) -> None:
+        """Persist configuration values with the device save endpoint."""
+        payload = dict(values)
+        try:
+            status = await self.status()
+        except ESPTimeCastError:
+            status = {}
+        countdown = status.get("countdown", {})
+        if isinstance(countdown, dict):
+            payload.setdefault("countdownEnabled", int(bool(countdown.get("enabled"))))
+            payload.setdefault("countdownLabel", str(countdown.get("label") or ""))
+            payload.setdefault("isDramaticCountdown", int(bool(countdown.get("isDramatic"))))
+            target = countdown.get("targetTimestamp")
+            if target:
+                target_dt = datetime.fromtimestamp(int(target))
+                payload.setdefault("countdownDate", target_dt.strftime("%Y-%m-%d"))
+                payload.setdefault("countdownTime", target_dt.strftime("%H:%M"))
+        await self._post(f"{self.base_url}/save", payload)
+
     async def send_message(
         self,
         message: str,
@@ -82,10 +103,14 @@ class ESPTimeCastApi:
 
     async def _post_action(self, payload: dict[str, str | int]) -> None:
         """POST form data to /action."""
+        await self._post(f"{self.base_url}/action", payload)
+
+    async def _post(self, url: str, payload: dict[str, str | int]) -> None:
+        """POST form data to the device."""
         try:
             async with async_timeout.timeout(REQUEST_TIMEOUT):
                 response = await self._session.post(
-                    f"{self.base_url}/action",
+                    url,
                     data=payload,
                     headers={"Content-Type": "application/x-www-form-urlencoded"},
                 )
