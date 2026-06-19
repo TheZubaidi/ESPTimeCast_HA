@@ -31,6 +31,11 @@ After restart, go to [**Settings > Devices & services**](https://my.home-assista
 
 Before publishing, update `issue_tracker` in `custom_components/esptimecast/manifest.json` to your repository's GitHub Issues URL.
 
+Recommended GitHub repository metadata for HACS validation:
+
+- Description: `Home Assistant custom integration for ESPTimeCast LED clock devices`
+- Topics: `home-assistant`, `hacs`, `hacs-integration`, `esptimecast`, `home-assistant-integration`
+
 ## Manual Install
 
 Copy `custom_components/esptimecast` into your Home Assistant `custom_components` directory and restart Home Assistant.
