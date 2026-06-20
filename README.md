@@ -36,6 +36,8 @@ Recommended GitHub repository metadata for HACS validation:
 - Description: `Home Assistant custom integration for ESPTimeCast LED clock devices`
 - Topics: `home-assistant`, `hacs`, `hacs-integration`, `esptimecast`, `home-assistant-integration`
 
+Brand assets used by HACS/Home Assistant are included at `custom_components/esptimecast/brand/icon.png` and `custom_components/esptimecast/brand/logo.png`.
+
 ## Manual Install
 
 Copy `custom_components/esptimecast` into your Home Assistant `custom_components` directory and restart Home Assistant.
