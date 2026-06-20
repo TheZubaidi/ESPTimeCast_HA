@@ -11,6 +11,7 @@ from homeassistant.core import HomeAssistant, ServiceCall
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers import aiohttp_client, config_validation as cv
 from homeassistant.helpers import device_registry as dr
+from homeassistant.helpers import entity_registry as er
 
 from .api import (
     ESPTimeCastApi,
@@ -39,6 +40,39 @@ from .const import (
 from .coordinator import ESPTimeCastCoordinator
 
 _LOGGER = logging.getLogger(__name__)
+
+OBSOLETE_ENTITY_KEYS = {
+    "binary_sensor": {
+        "allow_interrupt",
+        "auto_dimming_enabled",
+        "countdown_enabled",
+        "dimming_enabled",
+        "nightscout_active",
+        "nightscout_outdated",
+    },
+    "button": {
+        "pomodoro_stop",
+        "stopwatch_stop",
+        "timer_stop",
+    },
+    "sensor": {
+        "board",
+        "countdown_label",
+        "countdown_remaining",
+        "device_runtime",
+        "instagram_followers",
+        "language",
+        "message",
+        "nightscout_glucose",
+        "nightscout_trend",
+        "session_runtime",
+        "sns_type",
+        "timezone",
+        "version",
+        "weather_description",
+        "youtube_subscribers",
+    },
+}
 
 SEND_MESSAGE_SCHEMA = vol.Schema(
     {
@@ -82,6 +116,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     await coordinator.async_config_entry_first_refresh()
 
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = coordinator
+    _async_remove_obsolete_entities(hass, entry)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     _async_register_services(hass)
     return True
@@ -142,6 +177,18 @@ def _async_register_services(hass: HomeAssistant) -> None:
     hass.services.async_register(DOMAIN, SERVICE_SEND_MESSAGE, send_message, SEND_MESSAGE_SCHEMA)
     hass.services.async_register(DOMAIN, SERVICE_CLEAR_MESSAGE, clear_message, CLEAR_SCHEMA)
     hass.services.async_register(DOMAIN, SERVICE_ACTION, action, ACTION_SCHEMA)
+
+
+def _async_remove_obsolete_entities(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    """Remove entities from older ESPTimeCast versions that are no longer created."""
+    registry = er.async_get(hass)
+    for entity_entry in er.async_entries_for_config_entry(registry, entry.entry_id):
+        obsolete_keys = OBSOLETE_ENTITY_KEYS.get(entity_entry.domain)
+        if not obsolete_keys:
+            continue
+        unique_id = entity_entry.unique_id or ""
+        if any(unique_id.endswith(f"_{key}") for key in obsolete_keys):
+            registry.async_remove(entity_entry.entity_id)
 
 
 def _get_service_coordinator(hass: HomeAssistant, call: ServiceCall) -> ESPTimeCastCoordinator:
